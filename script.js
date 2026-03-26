@@ -932,60 +932,6 @@ function initQA() {
     });
 }
 
-function initFunFacts() {
-    const facts = [
-        'They can turn any grocery run into a mini adventure.',
-        'Coffee dates are still one of their favorite rituals.',
-        'They both say sunsets are better when shared.',
-        'Their playlist debates are serious, but always fun.',
-        'They are experts at turning ordinary days into memories.',
-        'Road trips + snacks + loud singing = their perfect combo.',
-        'They are competitive at games, but cuddly after.',
-        'They always find a reason to celebrate small wins.'
-    ];
-
-    const btn = $('#funFactBtn');
-    const popup = $('#funFactPopup');
-    const text = $('#funFactText');
-    const close = $('#funFactClose');
-
-    if (!popup || !text) return;
-
-    const showRandomFact = () => {
-        const index = Math.floor(Math.random() * facts.length);
-        text.textContent = facts[index];
-        popup.classList.add('active');
-    };
-
-    const hidePopup = () => popup.classList.remove('active');
-
-    btn?.addEventListener('click', showRandomFact);
-    close?.addEventListener('click', hidePopup);
-    popup.addEventListener('click', (e) => {
-        if (e.target === popup) hidePopup();
-    });
-
-    // Delegated fallback in case markup gets re-rendered
-    document.addEventListener('click', (e) => {
-        const target = e.target;
-        if (!(target instanceof Element)) return;
-        if (target.id === 'funFactBtn') {
-            showRandomFact();
-        }
-        if (target.id === 'funFactClose') {
-            hidePopup();
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') hidePopup();
-    });
-
-    // Expose global handlers for reliable inline fallback
-    window.showRandomFunFact = showRandomFact;
-    window.hideRandomFunFact = hidePopup;
-}
-
 // ============================================
 // NAVIGATION
 // ============================================
@@ -1157,7 +1103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initRSVP();
     initContact();
     initQA();
-    initFunFacts();
     initNavigation();
     initScrollAnimations();
     initSmoothScroll();
