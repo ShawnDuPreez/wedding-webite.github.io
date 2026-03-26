@@ -13,8 +13,11 @@ const state = {
     currentStream: null,
     facingMode: 'environment',
     lightboxIndex: 0,
-    weddingDate: new Date('2026-09-10T13:00:00'),
-    guestId: localStorage.getItem('weddingGuestId') || generateGuestId()
+    weddingDate: new Date('2026-09-10T16:30:00'),
+    guestId: localStorage.getItem('weddingGuestId') || generateGuestId(),
+    // Guests should only be able to take photos after 16:30 South African time (Africa/Johannesburg).
+    // In September South Africa is UTC+2, so 16:30 SAST == 14:30 UTC.
+    cameraLiveAtUtcMs: Date.UTC(2026, 8, 10, 14, 30, 0)
 };
 
 const SUPABASE_URL = 'https://uptwmlulayrbcopdenwz.supabase.co';
@@ -52,7 +55,7 @@ function showToast(message, type = 'success') {
 }
 
 function canTakePhotosNow() {
-    return true;
+    return Date.now() >= state.cameraLiveAtUtcMs;
 }
 
 function canTakePhotosHere() {
@@ -148,17 +151,27 @@ const camera = {
     uploadBtn: $('#uploadBtn'),
     uploadInput: $('#photoUpload'),
     realtimeChannel: null,
+    wasCameraLive: false,
     
     init() {
         this.loadSavedShots();
         this.bindEvents();
         this.loadPhotosFromStorage();
+        this.updateCameraAvailability();
+        // Keep the camera gate in sync if the page stays open past 16:30 SAST.
+        setInterval(() => this.updateCameraAvailability(), 15000);
         // Start realtime updates after the initial fetch attempt.
         this.fetchPhotosFromSupabase().finally(() => this.startRealtimeUpdates());
     },
     
     bindEvents() {
-        this.enableBtn?.addEventListener('click', () => this.start());
+        this.enableBtn?.addEventListener('click', () => {
+            if (!canTakePhotosNow()) {
+                showToast('Camera is locked until after 16:30 SAST (South Africa time).');
+                return;
+            }
+            this.start();
+        });
         this.shutterBtn?.addEventListener('click', () => this.takePhoto());
         this.discardBtn?.addEventListener('click', () => this.discardPhoto());
         this.saveBtn?.addEventListener('click', () => this.savePhoto());
@@ -182,7 +195,36 @@ const camera = {
         }
     },
     
+    updateCameraAvailability() {
+        const live = canTakePhotosNow();
+        
+        // Keep the button clickable so guests get feedback (instead of "nothing happens").
+        if (this.enableBtn) {
+            this.enableBtn.disabled = false;
+            this.enableBtn.title = live
+                ? ''
+                : 'Camera will go live at 4:30 PM on 10 September (South Africa time).';
+        }
+        if (this.shutterBtn) this.shutterBtn.disabled = !(live && canTakePhotosHere());
+        if (live && !this.wasCameraLive) {
+            this.wasCameraLive = true;
+            showToast('Camera is now live! Take photos.');
+            this.updateShotsDisplay();
+        }
+
+        const gateEl = $('#cameraLiveGate');
+        if (gateEl) {
+            if (live) {
+                gateEl.style.display = 'none';
+            } else {
+                gateEl.style.display = 'block';
+                gateEl.innerHTML = 'Camera will go live at <strong>4:30 PM</strong> on <strong>10 September</strong>.';
+            }
+        }
+    },
+    
     async start() {
+        if (!canTakePhotosNow()) return;
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { 
@@ -210,6 +252,10 @@ const camera = {
     },
     
     takePhoto() {
+        if (!canTakePhotosNow()) {
+            showToast('Camera is not live yet.');
+            return;
+        }
         // Flash effect
         this.flash.classList.add('active');
         setTimeout(() => this.flash.classList.remove('active'), 150);
@@ -242,6 +288,10 @@ const camera = {
     },
     
     async savePhoto() {
+        if (!canTakePhotosNow()) {
+            showToast('Camera is not live yet.');
+            return;
+        }
         const photoData = {
             id: Date.now(),
             src: this.previewImg.src,
@@ -315,6 +365,7 @@ const camera = {
     },
     
     async toggleCamera() {
+        if (!canTakePhotosNow()) return;
         state.facingMode = state.facingMode === 'environment' ? 'user' : 'environment';
         
         if (state.currentStream) {
