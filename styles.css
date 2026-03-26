@@ -78,6 +78,13 @@ body > *:not(#cursorCanvas) {
     #cursorCanvas {
         display: none;
     }
+
+    /* Mobile fail-safe: keep page scrollable even if a script fails. */
+    html,
+    body {
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 /* Selection */

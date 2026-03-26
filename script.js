@@ -1138,6 +1138,9 @@ function initDressSlideshows() {
 document.addEventListener('DOMContentLoaded', () => {
     // Unlock page scrolling immediately even if a later init fails.
     document.body.classList.add('loaded');
+    document.documentElement.style.overflowY = 'auto';
+    document.body.style.overflowY = 'auto';
+    document.body.style.overflow = '';
 
     // Start countdown
     updateCountdown();
@@ -1164,6 +1167,15 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🎉 Zimri & Shawn Wedding Website Loaded!');
     console.log('📸 Camera ready - Take as many photos as you like!');
     console.log(supabaseClient ? '☁️ Supabase connected' : '💾 Running with local fallback storage');
+});
+
+// Safari/Chrome mobile can restore a stale scroll lock from bfcache.
+window.addEventListener('pageshow', () => {
+    document.documentElement.style.overflowY = 'auto';
+    document.body.style.overflowY = 'auto';
+    if (!$('#lightbox')?.classList.contains('active')) {
+        document.body.style.overflow = '';
+    }
 });
 
 // Handle visibility change - pause camera when tab hidden
