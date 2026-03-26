@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Wedding | Zimri & Shawn - September 10th, 2026</title>
+    <meta name="description"
+        content="Extra! Extra! Read all about it! Zimri and Shawn are tying the knot. Join us for our wedding celebration.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <canvas id="cursorCanvas"></canvas>
+    <div class="floating-particles" id="floatingParticles"></div>
+    <div class="grain-overlay"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <!-- Breaking News Banner -->
+    <div class="breaking-news-banner" id="breakingNews">
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <span class="ticker-item">🎉 BREAKING NEWS: ZIMRI & SHAWN ARE GETTING MARRIED! 🎉</span>
+                <span class="ticker-item">📅 SAVE THE DATE: SEPTEMBER 10TH, 2026 📅</span>
+                <span class="ticker-item">💕 TWO HEARTS, ONE LOVE STORY 💕</span>
+                <span class="ticker-item">🥂 CELEBRATION OF A LIFETIME 🥂</span>
+                <span class="ticker-item">🎉 BREAKING NEWS: ZIMRI & SHAWN ARE GETTING MARRIED! 🎉</span>
+                <span class="ticker-item">📅 SAVE THE DATE: SEPTEMBER 10TH, 2026 📅</span>
+                <span class="ticker-item">💕 TWO HEARTS, ONE LOVE STORY 💕</span>
+                <span class="ticker-item">🥂 CELEBRATION OF A LIFETIME 🥂</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Masthead -->
+    <header class="masthead">
+        <div class="masthead-top">
+            <div class="masthead-left">
+                <span class="edition-info">VOL. MMXXVI</span>
+                <span class="edition-divider">|</span>
+                <span class="weather">Love: 100% Chance</span>
+            </div>
+            <div class="masthead-center">
+                <div class="date-badge">SEPTEMBER 10, 2026</div>
+            </div>
+            <div class="masthead-right">
+                <span class="price">PRICELESS EVENT</span>
+                <span class="edition-divider">|</span>
+                <span class="location">WORLDWIDE CELEBRATION</span>
+            </div>
+        </div>
+
+        <div class="newspaper-title">
+            <span class="title-the">The</span>
+            <h1 class="title-main">Daily Wedding</h1>
+            <span class="title-chronicle">Chronicle</span>
+        </div>
+
+        <div class="couple-headline">
+            <span class="headline-star">✦</span>
+            <h2 class="couple-names">
+                <span class="name-zimri">Zimri</span>
+                <span class="ampersand">&</span>
+                <span class="name-shawn">Shawn</span>
+            </h2>
+            <span class="headline-star">✦</span>
+        </div>
+
+        <p class="tagline">Request the Pleasure of Your Company at Their Nuptial Celebration</p>
+
+        <div class="masthead-rule">
+            <span class="rule-ornament">❦</span>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-ribbon">
+            <div class="nav-container">
+                <a href="#headlines" class="nav-link" data-section="headlines">
+                    <span class="nav-num">01</span>
+                    <span class="nav-text">Headlines</span>
+                </a>
+                <a href="#our-story" class="nav-link" data-section="our-story">
+                    <span class="nav-num">02</span>
+                    <span class="nav-text">Our Story</span>
+                </a>
+
+                <a href="#photo-catalogue" class="nav-link" data-section="photo-catalogue">
+                    <span class="nav-num">04</span>
+                    <span class="nav-text">Gallery</span>
+                </a>
+                <a href="#capture" class="nav-link" data-section="capture">
+                    <span class="nav-num">05</span>
+                    <span class="nav-text">Disposable Cam</span>
+                </a>
+                <a href="#dress-code" class="nav-link" data-section="dress-code">
+                    <span class="nav-num">06</span>
+                    <span class="nav-text">Dress Code</span>
+                </a>
+                <a href="#registry" class="nav-link" data-section="registry">
+                    <span class="nav-num">07</span>
+                    <span class="nav-text">Registry</span>
+                </a>
+                <a href="#qa" class="nav-link" data-section="qa">
+                    <span class="nav-num">08</span>
+                    <span class="nav-text">Q&A</span>
+                </a>
+                <a href="#rsvp" class="nav-link" data-section="rsvp">
+                    <span class="nav-num">09</span>
+                    <span class="nav-text">RSVP</span>
+                </a>
+                <a href="#contact" class="nav-link" data-section="contact">
+                    <span class="nav-num">10</span>
+                    <span class="nav-text">Contact</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="headlines" class="hero-section">
+        <div class="hero-grid">
+            <div class="hero-main-image">
+                <div class="photo-frame">
+                    <div class="frontimage" style="background-image: url('images/Frontimage.jpeg');">
+                        <div class="photo-caption-overlay">
+                            <span class="caption-label">FRONT PAGE</span>
+                            <span class="caption-title">The Happy Couple</span>
+                        </div>
+                    </div>
+                    <div class="tape tape-top-left"></div>
+                    <div class="tape tape-bottom-right"></div>
+                </div>
+            </div>
+
+            <div class="hero-headlines">
+                <article class="headline-card featured-headline">
+                    <span class="headline-category">EXCLUSIVE</span>
+                    <h3 class="headline-title">Love at First Sight: How They Met</h3>
+                    <p class="headline-excerpt">In a world of billions, two souls found each other. Read the full story
+                        of their magical first encounter...</p>
+                    <a href="#our-story" class="read-more">Read Full Story →</a>
+                </article>
+
+                <article class="headline-card">
+                    <span class="headline-category">EVENTS</span>
+                    <h3 class="headline-title">The Big Day Approaches</h3>
+                    <p class="headline-excerpt">September 10th, 2026 - Save the date for the celebration of the year.
+                    </p>
+                </article>
+
+                <article class="headline-card">
+                    <span class="headline-category">STYLE</span>
+                    <h3 class="headline-title">Black & White Dress Code</h3>
+                    <p class="headline-excerpt">All guests in black, bride & groom in white. A stunning visual
+                        celebration!</p>
+                    <a href="#dress-code" class="read-more">View Dress Code →</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wedding Countdown Timer -->
+    <section class="countdown-section">
+        <div class="countdown-container">
+            <h3 class="countdown-title">⏰ Time Until "I Do"</h3>
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">000</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="our-story" class="section story-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">❧</div>
+            <div class="header-content">
+                <span class="section-label">FEATURE STORY</span>
+                <h2 class="section-title">The Love Chronicles</h2>
+                <p class="section-subtitle">A Tale of Two Hearts</p>
+            </div>
+            <div class="header-ornament right">❧</div>
+        </div>
+
+        <div class="newspaper-columns">
+            <article class="story-article">
+                <div class="article-meta">
+                    <span class="byline">By Destiny</span>
+                    <span class="dateline">| First Published in Love</span>
+                </div>
+
+                <p class="drop-cap">We first met on a friend's camping trip. I almost didn't go, and she definitely
+                    wasn't my biggest fan at first, but for me it was love at first sight. Somewhere between late-night
+                    fires, shared jokes, and quiet moments under the stars, I slowly grew on her and our story truly
+                    began.</p>
+
+                <p>Through the seasons, they've shared countless adventures—from spontaneous road trips to quiet Sunday
+                    mornings. They've grown together, supported each other's wildest dreams, and built a love that feels
+                    like coming home.</p>
+
+                <div class="pull-quote">
+                    <blockquote>"In you, I've found my person, my partner, my forever. Every love story is beautiful,
+                        but ours is my favorite."</blockquote>
+                    <cite>— Zimri & Shawn</cite>
+                </div>
+
+                <p>Now, as they stand on the threshold of their greatest adventure, they invite you to witness the next
+                    chapter of their love story. Surrounded by the people who matter most, they'll say "I do" and begin
+                    their happily ever after.</p>
+            </article>
+
+            <aside class="story-sidebar">
+                <div class="sidebar-box timeline-box">
+                    <h4 class="sidebar-title">📰 Timeline of Events</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-dot"></span>
+                            <div class="timeline-content">
+                                <span class="year">Chapter 1</span>
+                                <span class="event">The First Meeting</span>
+                                <span class="event-detail">When two worlds collided</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-dot"></span>
+                            <div class="timeline-content">
+                                <span class="year">Chapter 2</span>
+                                <span class="event">First Adventure</span>
+                                <span class="event-detail">Discovering the world together</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-dot"></span>
+                            <div class="timeline-content">
+                                <span class="year">Chapter 3</span>
+                                <span class="event">The Proposal</span>
+                                <span class="event-detail">She said YES! 💍</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item current">
+                            <span class="timeline-dot"></span>
+                            <div class="timeline-content">
+                                <span class="year">Chapter 4</span>
+                                <span class="event">The Wedding</span>
+                                <span class="event-detail">September 10, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-box fun-facts">
+                    <h4 class="sidebar-title">📊 Fun Facts</h4>
+                    <button class="fun-fact-btn" id="funFactBtn" onclick="window.showRandomFunFact && window.showRandomFunFact()">Show Random Fun Fact</button>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+
+
+    <!-- Disposable Camera Section -->
+    <section id="capture" class="section capture-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">📸</div>
+            <div class="header-content">
+                <span class="section-label">GUEST CONTRIBUTIONS</span>
+                <h2 class="section-title">Disposable Camera</h2>
+                <p class="section-subtitle">Share Your Perspective</p>
+            </div>
+            <div class="header-ornament right">📸</div>
+        </div>
+
+        <div class="capture-intro">
+            <p class="capture-description">
+                Be our eyes! Use this digital disposable camera to capture candid moments from your point of view.
+                <strong>Each guest can take as many photos as they'd like.</strong> Your snapshots will appear in the live gallery
+                below!
+            </p>
+            <p class="capture-description">
+                The disposable camera will unlock on <strong>10 September 2026 at 4:30 PM</strong>, just as the celebration begins,
+                and will only work when you're at the venue at <strong>Minnesota 345 Rd, Faerie Glen, Pretoria</strong>.
+            </p>
+        </div>
+
+
+
+        <!-- Camera Interface -->
+        <div class="camera-container">
+            <div class="camera-body">
+                <!-- Viewfinder -->
+                <div class="camera-viewfinder">
+                    <video id="cameraVideo" class="camera-video" autoplay playsinline></video>
+                    <canvas id="cameraCanvas" class="camera-canvas" style="display: none;"></canvas>
+
+                    <!-- Camera Overlay UI -->
+                    <div class="camera-overlay">
+                        <div class="overlay-corner top-left"></div>
+                        <div class="overlay-corner top-right"></div>
+                        <div class="overlay-corner bottom-left"></div>
+                        <div class="overlay-corner bottom-right"></div>
+                        <div class="focus-frame">
+                            <span class="focus-text">TAP TO FOCUS</span>
+                        </div>
+                    </div>
+
+                    <!-- Flash Effect -->
+                    <div class="flash-effect" id="flashEffect"></div>
+
+                    <!-- Photo Preview -->
+                    <div class="photo-preview" id="photoPreview">
+                        <img id="previewImage" src="" alt="Preview">
+                        <div class="preview-actions">
+                            <button class="preview-btn discard" id="discardBtn">✕ Discard</button>
+                            <button class="preview-btn save" id="saveBtn">✓ Save Photo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Controls -->
+                <div class="camera-controls">
+                    <div class="control-left">
+                        <div class="shots-remaining">
+                            <span class="shots-icon">🎞️</span>
+                            <span class="shots-count" id="shotsCount">0</span>
+                            <span class="shots-label">photos captured</span>
+                        </div>
+                    </div>
+
+                    <div class="control-center">
+                        <button class="shutter-button" id="shutterBtn" disabled>
+                            <span class="shutter-ring"></span>
+                            <span class="shutter-inner"></span>
+                        </button>
+                    </div>
+
+                    <div class="control-right">
+                        <button class="camera-toggle" id="cameraToggle" title="Switch Camera">
+                            <span>↻</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Camera Info Strip -->
+                <div class="camera-info-strip">
+                    <span class="info-item">ISO 400</span>
+                    <span class="info-item">f/2.8</span>
+                    <span class="info-item" id="photoCounter">0 photos captured</span>
+                    <span class="info-item">KODAK</span>
+                </div>
+            </div>
+
+            <!-- Permission Request -->
+            <div class="camera-permission" id="cameraPermission">
+                <div class="permission-content">
+                    <span class="permission-icon">📷</span>
+                    <h3>Enable Camera Access</h3>
+                    <p>We need permission to access your camera so you can take photos. Your photos will be saved to our
+                        shared gallery.</p>
+                    <button class="permission-btn" id="enableCameraBtn">Enable Camera</button>
+                </div>
+            </div>
+
+            <!-- No Camera Fallback -->
+            <div class="camera-fallback" id="cameraFallback" style="display: none;">
+                <div class="fallback-content">
+                    <span class="fallback-icon">📷</span>
+                    <h3>Camera Required</h3>
+                    <p>It looks like we can't access a camera on this device. For this wedding, the disposable camera
+                        experience is only available on devices with an active camera.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="capture-tips">
+            <h4 class="tips-title">📰 Photography Tips</h4>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <span class="tip-icon">🤫</span>
+                    <p>Keep phones silent during the ceremony</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">🎉</span>
+                    <p>Go wild during the reception!</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">💃</span>
+                    <p>Capture those dance floor moments</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">🥂</span>
+                    <p>Candid shots beat posed photos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Photo Gallery Section -->
+    <section id="live-gallery" class="section live-gallery-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">🎞️</div>
+            <div class="header-content">
+                <span class="section-label">LIVE UPDATES</span>
+                <h2 class="section-title">Guest Photo Gallery</h2>
+                <p class="section-subtitle">Real-Time Moments from Our Guests</p>
+            </div>
+            <div class="header-ornament right">🎞️</div>
+        </div>
+
+        <div class="gallery-status">
+            <div class="status-indicator">
+                <span class="status-dot live"></span>
+                <span class="status-text">LIVE</span>
+            </div>
+            <span class="gallery-count"><span id="galleryCount">0</span> photos captured</span>
+        </div>
+
+        <!-- Photo Grid -->
+        <div class="photo-gallery" id="photoGallery">
+            <div class="gallery-empty" id="galleryEmpty">
+                <span class="empty-icon">📷</span>
+                <p>No photos yet. Be the first to capture a moment!</p>
+            </div>
+            <!-- Photos will be dynamically added here -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="gallery-pagination" id="galleryPagination" style="display: none;">
+            <button class="pagination-btn" id="prevPage" disabled>← Previous</button>
+            <span class="pagination-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+            <button class="pagination-btn" id="nextPage">Next →</button>
+        </div>
+
+        <!-- Database Notice -->
+        <div class="db-notice">
+            <p>💾 Photos are stored locally for now. In the future, all photos will be saved to our Supabase database
+                for permanent storage!</p>
+        </div>
+    </section>
+
+    <!-- Dress Code Section -->
+    <section id="dress-code" class="section dress-code-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">🖤</div>
+            <div class="header-content">
+                <span class="section-label">ATTIRE REQUIRED</span>
+                <h2 class="section-title">Dress Code</h2>
+                <p class="section-subtitle">Black & White Affair</p>
+            </div>
+            <div class="header-ornament right">🖤</div>
+        </div>
+
+        <div class="dress-code-intro">
+            <div class="theme-statement">
+                <span class="theme-icon">🤍</span>
+                <h3>Bride & Groom in White  -  Guests in Black</h3>
+                <span class="theme-icon">🖤</span>
+            </div>
+        </div>
+
+        <div class="dress-code-grid">
+            <div class="dress-slideshow-card">
+                <h4 class="slideshow-title">For Her — Garden Formal</h4>
+                <div class="tech-slideshow women-slideshow">
+                    <div class="mover-1"></div>
+                    <div class="mover-2"></div>
+                </div>
+            </div>
+
+            <div class="dress-slideshow-card">
+                <h4 class="slideshow-title">For Him — Garden Formal</h4>
+                <div class="tech-slideshow men-slideshow">
+                    <div class="mover-1"></div>
+                    <div class="mover-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dress-code-notes">
+            <div class="note-card">
+                <span class="note-icon">✓</span>
+                <h5>Garden Formal</h5>
+                <p>Dressy but not black-tie. Elevated, polished looks that are comfortable for an outdoor garden
+                    setting.</p>
+            </div>
+            <div class="note-card">
+                <span class="note-icon">⚠</span>
+                <h5>ALL Black Required</h5>
+                <p>Head-to-toe black. No other colors including shoes, accessories, or jewelry.</p>
+            </div>
+            <div class="note-card">
+                <span class="note-icon">🤍</span>
+                <h5>White Reserved</h5>
+                <p>White, cream, ivory reserved for bride & groom. Even small white accents should be avoided.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registry Section -->
+    <section id="registry" class="section registry-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">🎁</div>
+            <div class="header-content">
+                <span class="section-label">CONTRIBUTIONS WELCOME</span>
+                <h2 class="section-title">Wedding Registry</h2>
+                <p class="section-subtitle">Your Presence is Our Greatest Gift</p>
+            </div>
+            <div class="header-ornament right">🎁</div>
+        </div>
+
+        <div class="registry-intro">
+            <p class="registry-message">While gifts are never expected, if you wish to celebrate with a contribution,
+                we've made it easy. Your generosity helps us build our future together!</p>
+        </div>
+
+        <!-- Primary Contribution Option (Recommended) -->
+        <div class="paypal-highlight">
+            <div class="paypal-card">
+                <div class="paypal-icon-large">🏦</div>
+                <h3>Bank details</h3>
+                <p>If you would like to bless us with a cash gift, these are our bank details.</p>
+                <p><strong>Account Name:</strong> Shawn du Preez</p>
+                <p><strong>Account Number:</strong> 1145388086</p>
+                <p><strong>Branch:</strong> Nedbank Woodlands</p>
+                <p><strong>Branch Code:</strong> 198765</p>
+                <p><strong>Bank:</strong> Nedbank</p>
+            </div>
+        </div>
+
+        <!-- Thank You Note -->
+        <div class="registry-thanks">
+            <div class="thanks-card">
+                <span class="thanks-ornament">❦</span>
+                <p class="thanks-text">Thank you for being part of our special day. Your love and support mean the world
+                    to us!</p>
+                <span class="thanks-signature">— Zimri & Shawn</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section id="qa" class="section qa-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">❓</div>
+            <div class="header-content">
+                <span class="section-label">INQUIRIES ANSWERED</span>
+                <h2 class="section-title">Questions & Answers</h2>
+                <p class="section-subtitle">Everything You Need to Know</p>
+            </div>
+            <div class="header-ornament right">❓</div>
+        </div>
+
+        <div class="qa-container">
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">Can I bring a plus one?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>We have a strict guest list to stay within our venue's capacity. Your invitation will specify how
+                        many seats have been reserved in your honor. If your invitation includes a plus one, you're all
+                        set! If not, we hope you understand and can't wait to celebrate with you.</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">Are children invited?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>We love your little ones, but we have decided to make our wedding an adults-only celebration. We
+                        hope this gives parents a well-deserved night off to dance and celebrate with us!</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">Is there parking available?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>Yes! There is ample free parking at the venue.</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">What time should I arrive?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>The ceremony begins at 4:00 PM. We recommend arriving between 3:30-3:45 PM to park, find your
+                        seat, and settle in before the festivities begin.</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">Will the wedding be indoors or outdoors?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>The ceremony will be held outdoors in the garden, weather permitting. The reception will follow
+                        indoors. In case of rain, we have a beautiful backup indoor space ready!</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">What should I wear?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p><strong>ALL guests must wear BLACK.</strong> No exceptions! This is a black and white themed
+                        wedding where the bride and groom will be wearing white.</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">What if I have dietary restrictions?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>Please let us know about any allergies or dietary requirements when you RSVP. Our caterer is
+                        experienced with various dietary needs and will ensure everyone has a delicious meal!</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">Can I take photos during the ceremony?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>We kindly request an unplugged ceremony—please turn off phones and cameras during the ceremony so
+                        everyone can be fully present. We will have a photographer available to take photos of the ceremony. You can take photos after the ceremony.</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <button class="qa-question">
+                    <span class="q-marker">Q.</span>
+                    <span class="question-text">Who can I contact if I have more questions?</span>
+                    <span class="qa-toggle">+</span>
+                </button>
+                <div class="qa-answer">
+                    <p>If you have any other questions, please feel free to email us at <a
+                            href="mailto:lemuelia26@gmail.com">lemuelia26@gmail.com</a> or reach out to our
+                        Maid of Honor(This email is the maid of honor's email) or Best Man. We're here to help!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="section rsvp-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">✉️</div>
+            <div class="header-content">
+                <span class="section-label">PLEASE RESPOND</span>
+                <h2 class="section-title">R.S.V.P.</h2>
+                <p class="section-subtitle">Kindly Reply By August 10th, 2026</p>
+            </div>
+            <div class="header-ornament right">✉️</div>
+        </div>
+
+        <div class="rsvp-container">
+            <div class="rsvp-form-wrapper">
+                <div class="form-header">
+                    <span class="form-stamp">RSVP</span>
+                    <p class="form-instruction">We can't wait to celebrate with you! Please let us know if you'll be
+                        joining us.</p>
+                </div>
+
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="firstName" name="firstName" required>
+                            <label for="firstName">First Name</label>
+                            <span class="input-line"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="lastName" name="lastName" required>
+                            <label for="lastName">Last Name</label>
+                            <span class="input-line"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Email Address</label>
+                        <span class="input-line"></span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <div class="attendance-options">
+                            <label class="attendance-label">Will you be attending?</label>
+                            <div class="radio-group">
+
+                                <label class="radio-option">
+                                    <input type="radio" name="attending" value="yes" required>
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-text">Accept</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="attending" value="no">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-text">Regretfully Decline</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row" id="guestDetails">
+
+                    </div>
+
+                    <div class="form-group full-width">
+                        <input type="text" id="dietary" name="dietary">
+                        <label for="dietary">Dietary Restrictions / Allergies</label>
+                        <span class="input-line"></span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <textarea id="message" name="message" rows="4"></textarea>
+                        <label for="message">Leave us a message (optional)</label>
+                        <span class="input-line"></span>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <span class="btn-text">Send RSVP</span>
+                        <span class="btn-icon">📮</span>
+                    </button>
+                </form>
+
+                <!-- Success Message -->
+                <div class="rsvp-success" id="rsvpSuccess" style="display: none;">
+                    <div class="success-content">
+                        <span class="success-icon" id="rsvpSuccessIcon">✓</span>
+                        <h3 id="rsvpSuccessTitle">Thank You!</h3>
+                        <p id="rsvpSuccessMessage"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RSVP Info Card -->
+            <div class="rsvp-info">
+                <div class="info-card">
+                    <h4>📅 Save the Date</h4>
+                    <p class="info-date">September 10, 2026</p>
+                    <p class="info-time">Ceremony begins at 4:00 PM. <br>Be there by 3:30 PM to park, find your seat, and settle in before the festivities begin.</p>
+                </div>
+                <div class="info-card">
+                    <h4>📍 Venue</h4>
+                    <p class="info-venue">Beautiful Garden Venue</p>
+                    <p class="info-address">Tierpoort, Pretoria</p>
+                </div>
+                <div class="info-card dress-code-card">
+                    <h4>🖤 Dress Code</h4>
+                    <p class="dress-code-main">Bride & Groom in White - Guests in Black</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section qa-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">✉️</div>
+            <div class="header-content">
+                <span class="section-label">GET IN TOUCH</span>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Questions? We are here to help</p>
+            </div>
+            <div class="header-ornament right">✉️</div>
+        </div>
+
+        <div class="rsvp-container">
+            <div class="rsvp-form-wrapper">
+                <div class="form-header">
+                    <span class="form-stamp">Contact</span>
+                    <p class="form-instruction">Send us a message and we will get back to you.</p>
+                </div>
+
+                <form class="rsvp-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="contactName" name="name" required>
+                            <label for="contactName">Your Name</label>
+                            <span class="input-line"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" name="email" required>
+                            <label for="contactEmail">Email Address</label>
+                            <span class="input-line"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <input type="text" id="contactSubject" name="subject">
+                        <label for="contactSubject">Subject (optional)</label>
+                        <span class="input-line"></span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <textarea id="contactMessage" name="message" rows="5" required></textarea>
+                        <label for="contactMessage">Message</label>
+                        <span class="input-line"></span>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-icon">📨</span>
+                    </button>
+                </form>
+
+                <div class="rsvp-success" id="contactSuccess" style="display: none;">
+                    <div class="success-content">
+                        <span class="success-icon">✓</span>
+                        <h3>Message Sent</h3>
+                        <p id="contactSuccessMessage">Thanks for reaching out. We have received your message.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-ornaments">
+            <span class="ornament-item">✦</span>
+            <span class="ornament-item">❦</span>
+            <span class="ornament-item">✦</span>
+        </div>
+
+        <div class="footer-content">
+            <p class="footer-names">
+                <span class="footer-name">Zimri</span>
+                <span class="footer-ampersand">&</span>
+                <span class="footer-name">Shawn</span>
+            </p>
+            <p class="footer-date">September 10th, 2026</p>
+            <p class="footer-message">We can't wait to celebrate with you!</p>
+        </div>
+
+        <div class="footer-rule">
+            <span class="rule-ornament">❦</span>
+        </div>
+
+        <p class="footer-credit">Made with 💕 and lots of ☕</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Photo saved!</span>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">✕</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">←</button>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">→</button>
+    </div>
+
+    <!-- Fun Fact Popup -->
+    <div class="fun-fact-popup" id="funFactPopup">
+        <div class="fun-fact-card">
+            <button class="fun-fact-close" id="funFactClose">✕</button>
+            <h4>Random Fun Fact</h4>
+            <p id="funFactText"></p>
+        </div>
+    </div>
+
+    <!-- GSAP for 3D ring galleries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Site logic -->
+    <script src="script.js"></script>
+
+    <!-- 3D Tubes cursor background (desktop only, gold & black) -->
+    <script src="https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"></script>
+    <script>
+        (function () {
+            const isMobile =
+                /android|iphone|ipad|ipod|windows phone/i.test(navigator.userAgent) ||
+                window.matchMedia("(pointer: coarse)").matches;
+
+            if (isMobile) return;
+
+            const canvas = document.getElementById("cursorCanvas");
+            if (!canvas || typeof TubesCursor !== "function") return;
+
+            const goldPalette = ["#000000", "#FFD700", "#C9A961", "#B8860B"];
+
+            function pickColors(count) {
+                const colors = [];
+                for (let i = 0; i < count; i++) {
+                    const idx = Math.floor(Math.random() * goldPalette.length);
+                    colors.push(goldPalette[idx]);
+                }
+                return colors;
+            }
+
+            const app = TubesCursor(canvas, {
+                tubes: {
+                    colors: ["#FFD700", "#000000", "#C9A961"],
+                    lights: {
+                        intensity: 220,
+                        colors: ["#FFD700", "#FFF8DC", "#C9A961", "#000000"]
+                    }
+                }
+            });
+
+            document.body.addEventListener("click", () => {
+                const colors = pickColors(3);
+                const lightsColors = pickColors(4);
+                app.tubes.setColors(colors);
+                app.tubes.setLightsColors(lightsColors);
+            });
+        })();
+    </script>
+</body>
+
+</html>
