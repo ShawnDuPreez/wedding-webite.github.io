@@ -656,12 +656,13 @@ function initRSVP() {
     const successTitle = $('#rsvpSuccessTitle');
     const successIcon = $('#rsvpSuccessIcon');
     const resetBtn = $('#resetRsvp');
-    const attendingRadios = document.getElementsByName('attending');
+    const attendingRadios = document.querySelectorAll('input[name="attending"]');
     const guestDetails = $('#guestDetails');
     
     // Toggle guest details based on attendance
     attendingRadios.forEach(radio => {
         radio.addEventListener('change', () => {
+            if (!guestDetails) return;
             if (radio.value === 'yes' && radio.checked) {
                 guestDetails.style.display = 'grid';
             } else if (radio.value === 'no' && radio.checked) {
@@ -672,74 +673,74 @@ function initRSVP() {
     
     form?.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
         
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        // Add timestamp and ID
-        data.submittedAt = new Date().toISOString();
-        data.id = Date.now().toString();
-        
-        if (supabaseClient) {
-            const { error } = await supabaseClient
-                .from('rsvps')
-                .insert([{
-                    first_name: data.firstName,
-                    last_name: data.lastName,
-                    email: data.email,
-                    attending: data.attending,
-                    dietary: data.dietary || null,
-                    message: data.message || null,
-                    submitted_at: data.submittedAt
-                }]);
+        try {
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Add timestamp and ID
+            data.submittedAt = new Date().toISOString();
+            data.id = Date.now().toString();
+            
+            if (supabaseClient) {
+                const { error } = await supabaseClient
+                    .from('rsvps')
+                    .insert([{
+                        first_name: data.firstName,
+                        last_name: data.lastName,
+                        email: data.email,
+                        attending: data.attending,
+                        dietary: data.dietary || null,
+                        message: data.message || null,
+                        submitted_at: data.submittedAt
+                    }]);
 
-            if (error) {
-                console.error('RSVP Supabase insert failed:', error);
+                if (error) {
+                    console.error('RSVP Supabase insert failed:', error);
+                    const rsvps = JSON.parse(localStorage.getItem('weddingRSVPs') || '[]');
+                    rsvps.push(data);
+                    localStorage.setItem('weddingRSVPs', JSON.stringify(rsvps));
+                }
+            } else {
                 const rsvps = JSON.parse(localStorage.getItem('weddingRSVPs') || '[]');
                 rsvps.push(data);
                 localStorage.setItem('weddingRSVPs', JSON.stringify(rsvps));
             }
-        } else {
-            const rsvps = JSON.parse(localStorage.getItem('weddingRSVPs') || '[]');
-            rsvps.push(data);
-            localStorage.setItem('weddingRSVPs', JSON.stringify(rsvps));
-        }
 
-        const rsvpEmailSent = await sendNotificationEmail('rsvp', data);
-        
-        // Show success
-        if (successMessage) {
-            if (data.attending === 'yes') {
-                if (successTitle) successTitle.textContent = 'Thank You!';
-                if (successIcon) {
-                    successIcon.textContent = '✓';
-                    successIcon.classList.remove('decline');
+            // Show success immediately; do not block on email function latency/failure
+            if (successMessage) {
+                if (data.attending === 'yes') {
+                    if (successTitle) successTitle.textContent = 'Thank You!';
+                    if (successIcon) {
+                        successIcon.textContent = '✓';
+                        successIcon.classList.remove('decline');
+                    }
+                    successMessage.textContent = 'See you there!';
+                } else {
+                    if (successTitle) successTitle.textContent = "I'm sorry";
+                    if (successIcon) {
+                        successIcon.textContent = '✕';
+                        successIcon.classList.add('decline');
+                    }
+                    successMessage.textContent = "I'm sorry you wont be attneding";
                 }
-                successMessage.textContent = 'See you there!';
-            } else {
-                if (successTitle) successTitle.textContent = "I'm sorry";
-                if (successIcon) {
-                    successIcon.textContent = '✕';
-                    successIcon.classList.add('decline');
-                }
-                successMessage.textContent = "I'm sorry you wont be attneding";
             }
-        }
 
-        form.style.display = 'none';
-        success.style.display = 'block';
-        
-        // Show toast
-        showToast(
-            rsvpEmailSent
-                ? 'RSVP submitted and email notification sent!'
-                : 'RSVP submitted, but email notification failed.'
-        );
-        
-        // In production with Supabase:
-        // const { data: result, error } = await supabase
-        //     .from('rsvps')
-        //     .insert([data]);
+            form.style.display = 'none';
+            if (success) success.style.display = 'block';
+            showToast('RSVP submitted!');
+
+            sendNotificationEmail('rsvp', data).then((sent) => {
+                showToast(sent ? 'RSVP email notification sent!' : 'RSVP saved, but email notification failed.');
+            });
+        } catch (error) {
+            console.error('RSVP submit failed:', error);
+            showToast('Could not submit RSVP. Please try again.', 'error');
+        } finally {
+            if (submitBtn) submitBtn.disabled = false;
+        }
     });
     
     resetBtn?.addEventListener('click', () => {
@@ -760,55 +761,62 @@ function initContact() {
 
     form?.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        data.createdAt = new Date().toISOString();
-        const messageText = (data.message || '').toLowerCase();
-        const subjectText = (data.subject || '').toLowerCase();
+        try {
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            data.createdAt = new Date().toISOString();
+            const messageText = (data.message || '').toLowerCase();
+            const subjectText = (data.subject || '').toLowerCase();
 
-        let sent = false;
-        if (supabaseClient) {
-            const { error } = await supabaseClient
-                .from('contact_messages')
-                .insert([{
-                    name: data.name,
-                    email: data.email,
-                    subject: data.subject || null,
-                    message: data.message,
-                    created_at: data.createdAt
-                }]);
-            if (!error) sent = true;
-            if (error) {
-                console.error('Contact Supabase insert failed:', error);
+            let sent = false;
+            if (supabaseClient) {
+                const { error } = await supabaseClient
+                    .from('contact_messages')
+                    .insert([{
+                        name: data.name,
+                        email: data.email,
+                        subject: data.subject || null,
+                        message: data.message,
+                        created_at: data.createdAt
+                    }]);
+                if (!error) sent = true;
+                if (error) {
+                    console.error('Contact Supabase insert failed:', error);
+                }
             }
-        }
 
-        if (!sent) {
-            const messages = JSON.parse(localStorage.getItem('weddingContactMessages') || '[]');
-            messages.push(data);
-            localStorage.setItem('weddingContactMessages', JSON.stringify(messages));
-        }
-
-        const contactEmailSent = await sendNotificationEmail('contact', data);
-
-        if (successMessage) {
-            if (messageText.includes('urgent') || messageText.includes('asap') || subjectText.includes('urgent')) {
-                successMessage.textContent = 'Thanks for reaching out. We have marked this as urgent and will respond as soon as possible.';
-            } else if (messageText.includes('?') || messageText.includes('question') || subjectText.includes('question')) {
-                successMessage.textContent = 'Thanks for your question. We received it and will get back to you soon.';
-            } else {
-                successMessage.textContent = 'Thanks for reaching out. We have received your message.';
+            if (!sent) {
+                const messages = JSON.parse(localStorage.getItem('weddingContactMessages') || '[]');
+                messages.push(data);
+                localStorage.setItem('weddingContactMessages', JSON.stringify(messages));
             }
-        }
 
-        form.style.display = 'none';
-        success.style.display = 'block';
-        showToast(
-            contactEmailSent
-                ? 'Message sent and email notification delivered!'
-                : 'Message saved, but email notification failed.'
-        );
+            if (successMessage) {
+                if (messageText.includes('urgent') || messageText.includes('asap') || subjectText.includes('urgent')) {
+                    successMessage.textContent = 'Thanks for reaching out. We have marked this as urgent and will respond as soon as possible.';
+                } else if (messageText.includes('?') || messageText.includes('question') || subjectText.includes('question')) {
+                    successMessage.textContent = 'Thanks for your question. We received it and will get back to you soon.';
+                } else {
+                    successMessage.textContent = 'Thanks for reaching out. We have received your message.';
+                }
+            }
+
+            form.style.display = 'none';
+            if (success) success.style.display = 'block';
+            showToast('Message sent!');
+
+            sendNotificationEmail('contact', data).then((sentOk) => {
+                showToast(sentOk ? 'Contact email notification sent!' : 'Message saved, but email notification failed.');
+            });
+        } catch (error) {
+            console.error('Contact submit failed:', error);
+            showToast('Could not send message. Please try again.', 'error');
+        } finally {
+            if (submitBtn) submitBtn.disabled = false;
+        }
     });
 
     resetBtn?.addEventListener('click', () => {
