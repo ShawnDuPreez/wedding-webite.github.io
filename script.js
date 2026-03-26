@@ -117,10 +117,16 @@ function updateCountdown() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
     
-    $('#days').textContent = days.toString().padStart(3, '0');
-    $('#hours').textContent = hours.toString().padStart(2, '0');
-    $('#minutes').textContent = minutes.toString().padStart(2, '0');
-    $('#seconds').textContent = seconds.toString().padStart(2, '0');
+    const daysEl = $('#days');
+    const hoursEl = $('#hours');
+    const minutesEl = $('#minutes');
+    const secondsEl = $('#seconds');
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+    daysEl.textContent = days.toString().padStart(3, '0');
+    hoursEl.textContent = hours.toString().padStart(2, '0');
+    minutesEl.textContent = minutes.toString().padStart(2, '0');
+    secondsEl.textContent = seconds.toString().padStart(2, '0');
 }
 
 // ============================================

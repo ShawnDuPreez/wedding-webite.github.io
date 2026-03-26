@@ -186,7 +186,7 @@
                     <span class="countdown-label">Minutes</span>
                 </div>
                 <div class="countdown-item">
-                    <span class="countdown-number" id="secondsb">00</span>
+                    <span class="countdown-number" id="seconds">00</span>
                     <span class="countdown-label">Seconds</span>
                 </div>
             </div>
@@ -895,48 +895,7 @@
     <!-- Site logic -->
     <script src="script.js"></script>
 
-    <!-- 3D Tubes cursor background (desktop only, gold & black) -->
-    <script src="https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"></script>
-    <script>
-        (function () {
-            const isMobile =
-                /android|iphone|ipad|ipod|windows phone/i.test(navigator.userAgent) ||
-                window.matchMedia("(pointer: coarse)").matches;
-
-            if (isMobile) return;
-
-            const canvas = document.getElementById("cursorCanvas");
-            if (!canvas || typeof TubesCursor !== "function") return;
-
-            const goldPalette = ["#000000", "#FFD700", "#C9A961", "#B8860B"];
-
-            function pickColors(count) {
-                const colors = [];
-                for (let i = 0; i < count; i++) {
-                    const idx = Math.floor(Math.random() * goldPalette.length);
-                    colors.push(goldPalette[idx]);
-                }
-                return colors;
-            }
-
-            const app = TubesCursor(canvas, {
-                tubes: {
-                    colors: ["#FFD700", "#000000", "#C9A961"],
-                    lights: {
-                        intensity: 220,
-                        colors: ["#FFD700", "#FFF8DC", "#C9A961", "#000000"]
-                    }
-                }
-            });
-
-            document.body.addEventListener("click", () => {
-                const colors = pickColors(3);
-                const lightsColors = pickColors(4);
-                app.tubes.setColors(colors);
-                app.tubes.setLightsColors(lightsColors);
-            });
-        })();
-    </script>
+    <!-- Removed tubes cursor script due to module parse errors on production -->
 </body>
 
 </html>
