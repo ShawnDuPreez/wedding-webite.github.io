@@ -1238,8 +1238,9 @@ body > *:not(#cursorCanvas) {
     content: '';
     position: absolute;
     left: 6px;
-    top: 20px;
-    bottom: -20px;
+    /* Anchor the line to the dot center, and extend through the parent gap. */
+    top: 10px;
+    bottom: calc(-1 * var(--space-md));
     width: 2px;
     background: var(--paper-tan);
     transition: all var(--transition-fast);
