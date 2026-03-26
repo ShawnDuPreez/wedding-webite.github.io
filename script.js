@@ -982,7 +982,7 @@ function initDressSlideshows() {
     const renderStrip = (el, images) => {
         if (!el) return;
         const strip = [...images, ...images]
-            .map((src) => `<img class="slide-strip-img" src="${src}" alt="Dress code inspiration" loading="lazy">`)
+            .map((src) => `<img class="slide-strip-img" src="${src}" alt="Dress code inspiration" loading="eager" decoding="async">`)
             .join('');
         el.innerHTML = strip;
     };
