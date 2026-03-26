@@ -147,12 +147,14 @@ const camera = {
     toggleBtn: $('#cameraToggle'),
     uploadBtn: $('#uploadBtn'),
     uploadInput: $('#photoUpload'),
+    realtimeChannel: null,
     
     init() {
         this.loadSavedShots();
         this.bindEvents();
         this.loadPhotosFromStorage();
-        this.fetchPhotosFromSupabase();
+        // Start realtime updates after the initial fetch attempt.
+        this.fetchPhotosFromSupabase().finally(() => this.startRealtimeUpdates());
     },
     
     bindEvents() {
@@ -399,6 +401,68 @@ const camera = {
             this.updateShotsDisplay();
         } catch (err) {
             console.error('Failed to fetch Supabase photos:', err);
+        }
+    },
+
+    startRealtimeUpdates() {
+        if (!supabaseClient) return;
+        if (this.realtimeChannel) return; // prevent duplicate subscriptions
+
+        // Supabase Realtime: notify clients when new rows are inserted.
+        this.realtimeChannel = supabaseClient
+            .channel('wedding-guest-photos')
+            .on(
+                'postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'photos' },
+                (payload) => {
+                    const photo = payload?.new;
+                    if (!photo) return;
+
+                    const newId = photo.id;
+                    const newUrl = photo.photo_url;
+                    if (typeof newUrl !== 'string' || !newUrl) return;
+                    const createdAt = photo.created_at || new Date().toISOString();
+
+                    // Dedupe to avoid duplicate entries from optimistic UI + fetch + realtime.
+                    const alreadyExists = state.photos.some((p) => {
+                        if (newId != null && p.id === newId) return true;
+                        if (typeof newUrl === 'string' && newUrl && p.photo_url === newUrl) return true;
+                        return false;
+                    });
+                    if (alreadyExists) return;
+
+                    state.photos.push({
+                        id: newId ?? photo.created_at ?? Date.now(),
+                        src: newUrl,
+                        timestamp: createdAt,
+                        guestId: photo.guest_id,
+                        photo_url: newUrl,
+                        is_synced: true
+                    });
+
+                    state.photos.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                    this.savePhotosToStorage();
+                    gallery.render();
+                    this.updateShotsDisplay();
+                }
+            )
+            .subscribe((status) => {
+                if (status === 'SUBSCRIBED') {
+                    console.log('📡 Realtime photo updates connected');
+                } else if (status === 'CHANNEL_ERROR') {
+                    console.warn('Realtime photo updates failed to connect');
+                }
+            });
+    },
+
+    stopRealtimeUpdates() {
+        if (!this.realtimeChannel) return;
+        try {
+            this.realtimeChannel.unsubscribe();
+        } catch (e) {
+            // ignore
+        } finally {
+            this.realtimeChannel = null;
         }
     }
 };
@@ -1068,4 +1132,5 @@ document.addEventListener('visibilitychange', () => {
 // Handle beforeunload - save any unsaved data
 window.addEventListener('beforeunload', () => {
     camera.savePhotosToStorage();
+    camera.stopRealtimeUpdates();
 });

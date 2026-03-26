@@ -2964,7 +2964,7 @@ body > *:not(#cursorCanvas) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-xl); 
 }
 
 .dress-slideshow-card {
@@ -3018,7 +3018,9 @@ body > *:not(#cursorCanvas) {
 .slide-strip-img {
     height: 100%;
     width: 220px;
-    object-fit: cover;
+    /* Show the full person without cropping. */
+    object-fit: contain;
+    background: var(--paper-beige);
     flex: 0 0 auto;
 }
 

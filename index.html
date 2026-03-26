@@ -274,10 +274,178 @@
         </div>
     </section>
 
+<!-- RSVP Section -->
+<section id="rsvp" class="section rsvp-section">
+    <div class="section-header vintage-header">
+        <div class="header-ornament left">✉️</div>
+        <div class="header-content">
+            <span class="section-label">PLEASE RESPOND</span>
+            <h2 class="section-title">R.S.V.P.</h2>
+            <p class="section-subtitle">Kindly Reply By August 10th, 2026</p>
+        </div>
+        <div class="header-ornament right">✉️</div>
+    </div>
 
+    <div class="rsvp-container">
+        <div class="rsvp-form-wrapper">
+            <div class="form-header">
+                <span class="form-stamp">RSVP</span>
+                <p class="form-instruction">We can't wait to celebrate with you! Please let us know if you'll be
+                    joining us.</p>
+            </div>
 
-    <!-- Disposable Camera Section -->
-    <section id="capture" class="section capture-section">
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="firstName" name="firstName" required>
+                        <label for="firstName">First Name</label>
+                        <span class="input-line"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="lastName" name="lastName" required>
+                        <label for="lastName">Last Name</label>
+                        <span class="input-line"></span>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <input type="email" id="email" name="email" required>
+                    <label for="email">Email Address</label>
+                    <span class="input-line"></span>
+                </div>
+
+                <div class="form-group full-width">
+                    <div class="attendance-options">
+                        <label class="attendance-label">Will you be attending?</label>
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+                                <input type="radio" name="attending" value="yes" required>
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">Accept</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="attending" value="no">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">Regretfully Decline</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row" id="guestDetails">
+
+                </div>
+
+                <div class="form-group full-width">
+                    <input type="text" id="dietary" name="dietary">
+                    <label for="dietary">Dietary Restrictions / Allergies</label>
+                    <span class="input-line"></span>
+                </div>
+
+                <div class="form-group full-width">
+                    <textarea id="message" name="message" rows="4"></textarea>
+                    <label for="message">Leave us a message (optional)</label>
+                    <span class="input-line"></span>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <span class="btn-text">Send RSVP</span>
+                    <span class="btn-icon">📮</span>
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="rsvp-success" id="rsvpSuccess" style="display: none;">
+                <div class="success-content">
+                    <span class="success-icon" id="rsvpSuccessIcon">✓</span>
+                    <h3 id="rsvpSuccessTitle">Thank You!</h3>
+                    <p id="rsvpSuccessMessage"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RSVP Info Card -->
+        <div class="rsvp-info">
+            <div class="info-card">
+                <h4>📅 Save the Date</h4>
+                <p class="info-date">September 10, 2026</p>
+                <p class="info-time">Ceremony begins at 4:00 PM. <br>Be there by 3:30 PM to park, find your seat, and settle in before the festivities begin.</p>
+            </div>
+            <div class="info-card">
+                <h4>📍 Venue</h4>
+                <p class="info-venue">Beautiful Garden Venue</p>
+                <p class="info-address">Tierpoort, Pretoria</p>
+            </div>
+            <div class="info-card dress-code-card">
+                <h4>🖤 Dress Code</h4>
+                <p class="dress-code-main">Bride & Groom in White - Guests in Black</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+   
+    <!-- Dress Code Section -->
+    <section id="dress-code" class="section dress-code-section">
+        <div class="section-header vintage-header">
+            <div class="header-ornament left">🖤</div>
+            <div class="header-content">
+                <span class="section-label">ATTIRE REQUIRED</span>
+                <h2 class="section-title">Dress Code</h2>
+                <p class="section-subtitle">Black & White Affair</p>
+            </div>
+            <div class="header-ornament right">🖤</div>
+        </div>
+
+        <div class="dress-code-intro">
+            <div class="theme-statement">
+                <span class="theme-icon">🤍</span>
+                <h3>Bride & Groom in White  -  Guests in Black</h3>
+                <span class="theme-icon">🖤</span>
+            </div>
+        </div>
+
+        <div class="dress-code-grid">
+            <div class="dress-slideshow-card">
+                <h4 class="slideshow-title">For Her — semi formal</h4>
+                <div class="tech-slideshow women-slideshow">
+                    <div class="mover-1"></div>
+                    <div class="mover-2"></div>
+                </div>
+            </div>
+
+            <div class="dress-slideshow-card">
+                <h4 class="slideshow-title">For Him — semi formal</h4>
+                <div class="tech-slideshow men-slideshow">
+                    <div class="mover-1"></div>
+                    <div class="mover-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dress-code-notes">
+            <div class="note-card">
+                <span class="note-icon">✓</span>
+                <h5>semi formal</h5>
+                <p>Dressy but not black-tie. Elevated, polished looks that are comfortable for an outdoor garden
+                    setting.</p>
+            </div>
+            <div class="note-card">
+                <span class="note-icon">⚠</span>
+                <h5>ALL Black Required</h5>
+                <p>Head-to-toe black. No other colors except shoes, accessories, or jewelry.</p>
+            </div>
+            <div class="note-card">
+                <span class="note-icon">🤍</span>
+                <h5>White Reserved</h5>
+                <p>White, cream, ivory reserved for bride & groom. Even small white accents should be avoided.</p>
+            </div>
+        </div>
+    </section>
+
+     <!-- Disposable Camera Section -->
+     <section id="capture" class="section capture-section">
         <div class="section-header vintage-header">
             <div class="header-ornament left">📸</div>
             <div class="header-content">
@@ -449,64 +617,6 @@
         </div>
     </section>
 
-    <!-- Dress Code Section -->
-    <section id="dress-code" class="section dress-code-section">
-        <div class="section-header vintage-header">
-            <div class="header-ornament left">🖤</div>
-            <div class="header-content">
-                <span class="section-label">ATTIRE REQUIRED</span>
-                <h2 class="section-title">Dress Code</h2>
-                <p class="section-subtitle">Black & White Affair</p>
-            </div>
-            <div class="header-ornament right">🖤</div>
-        </div>
-
-        <div class="dress-code-intro">
-            <div class="theme-statement">
-                <span class="theme-icon">🤍</span>
-                <h3>Bride & Groom in White  -  Guests in Black</h3>
-                <span class="theme-icon">🖤</span>
-            </div>
-        </div>
-
-        <div class="dress-code-grid">
-            <div class="dress-slideshow-card">
-                <h4 class="slideshow-title">For Her — semi formal</h4>
-                <div class="tech-slideshow women-slideshow">
-                    <div class="mover-1"></div>
-                    <div class="mover-2"></div>
-                </div>
-            </div>
-
-            <div class="dress-slideshow-card">
-                <h4 class="slideshow-title">For Him — semi formal</h4>
-                <div class="tech-slideshow men-slideshow">
-                    <div class="mover-1"></div>
-                    <div class="mover-2"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="dress-code-notes">
-            <div class="note-card">
-                <span class="note-icon">✓</span>
-                <h5>semi formal</h5>
-                <p>Dressy but not black-tie. Elevated, polished looks that are comfortable for an outdoor garden
-                    setting.</p>
-            </div>
-            <div class="note-card">
-                <span class="note-icon">⚠</span>
-                <h5>ALL Black Required</h5>
-                <p>Head-to-toe black. No other colors except shoes, accessories, or jewelry.</p>
-            </div>
-            <div class="note-card">
-                <span class="note-icon">🤍</span>
-                <h5>White Reserved</h5>
-                <p>White, cream, ivory reserved for bride & groom. Even small white accents should be avoided.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Registry Section -->
     <section id="registry" class="section registry-section">
         <div class="section-header vintage-header">
@@ -668,117 +778,6 @@
                     <p>If you have any other questions, please feel free to email us at <a
                             href="mailto:lemuelia26@gmail.com">lemuelia26@gmail.com</a> or reach out to our
                         Maid of Honor(This email is the maid of honor's email) or Best Man. We're here to help!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- RSVP Section -->
-    <section id="rsvp" class="section rsvp-section">
-        <div class="section-header vintage-header">
-            <div class="header-ornament left">✉️</div>
-            <div class="header-content">
-                <span class="section-label">PLEASE RESPOND</span>
-                <h2 class="section-title">R.S.V.P.</h2>
-                <p class="section-subtitle">Kindly Reply By August 10th, 2026</p>
-            </div>
-            <div class="header-ornament right">✉️</div>
-        </div>
-
-        <div class="rsvp-container">
-            <div class="rsvp-form-wrapper">
-                <div class="form-header">
-                    <span class="form-stamp">RSVP</span>
-                    <p class="form-instruction">We can't wait to celebrate with you! Please let us know if you'll be
-                        joining us.</p>
-                </div>
-
-                <form class="rsvp-form" id="rsvpForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" id="firstName" name="firstName" required>
-                            <label for="firstName">First Name</label>
-                            <span class="input-line"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="lastName" name="lastName" required>
-                            <label for="lastName">Last Name</label>
-                            <span class="input-line"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <input type="email" id="email" name="email" required>
-                        <label for="email">Email Address</label>
-                        <span class="input-line"></span>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <div class="attendance-options">
-                            <label class="attendance-label">Will you be attending?</label>
-                            <div class="radio-group">
-
-                                <label class="radio-option">
-                                    <input type="radio" name="attending" value="yes" required>
-                                    <span class="radio-custom"></span>
-                                    <span class="radio-text">Accept</span>
-                                </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="attending" value="no">
-                                    <span class="radio-custom"></span>
-                                    <span class="radio-text">Regretfully Decline</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row" id="guestDetails">
-
-                    </div>
-
-                    <div class="form-group full-width">
-                        <input type="text" id="dietary" name="dietary">
-                        <label for="dietary">Dietary Restrictions / Allergies</label>
-                        <span class="input-line"></span>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <textarea id="message" name="message" rows="4"></textarea>
-                        <label for="message">Leave us a message (optional)</label>
-                        <span class="input-line"></span>
-                    </div>
-
-                    <button type="submit" class="submit-button">
-                        <span class="btn-text">Send RSVP</span>
-                        <span class="btn-icon">📮</span>
-                    </button>
-                </form>
-
-                <!-- Success Message -->
-                <div class="rsvp-success" id="rsvpSuccess" style="display: none;">
-                    <div class="success-content">
-                        <span class="success-icon" id="rsvpSuccessIcon">✓</span>
-                        <h3 id="rsvpSuccessTitle">Thank You!</h3>
-                        <p id="rsvpSuccessMessage"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RSVP Info Card -->
-            <div class="rsvp-info">
-                <div class="info-card">
-                    <h4>📅 Save the Date</h4>
-                    <p class="info-date">September 10, 2026</p>
-                    <p class="info-time">Ceremony begins at 4:00 PM. <br>Be there by 3:30 PM to park, find your seat, and settle in before the festivities begin.</p>
-                </div>
-                <div class="info-card">
-                    <h4>📍 Venue</h4>
-                    <p class="info-venue">Beautiful Garden Venue</p>
-                    <p class="info-address">Tierpoort, Pretoria</p>
-                </div>
-                <div class="info-card dress-code-card">
-                    <h4>🖤 Dress Code</h4>
-                    <p class="dress-code-main">Bride & Groom in White - Guests in Black</p>
                 </div>
             </div>
         </div>
