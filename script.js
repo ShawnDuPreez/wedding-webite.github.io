@@ -1136,6 +1136,9 @@ function initDressSlideshows() {
 // INITIALIZE
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
+    // Unlock page scrolling immediately even if a later init fails.
+    document.body.classList.add('loaded');
+
     // Start countdown
     updateCountdown();
     setInterval(updateCountdown, 1000);
@@ -1157,8 +1160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initPhotoRings();
     initDressSlideshows();
-    // Add loaded class to body for any CSS transitions
-    document.body.classList.add('loaded');
     
     console.log('🎉 Zimri & Shawn Wedding Website Loaded!');
     console.log('📸 Camera ready - Take as many photos as you like!');

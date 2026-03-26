@@ -4682,8 +4682,9 @@ body > *:not(#cursorCanvas) {
 /* ============================================
    LOADING ANIMATION
    ============================================ */
+/* Keep horizontal clipping, but never hard-lock vertical scroll on load. */
 body:not(.loaded) {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 body.loaded .section {
