@@ -14,15 +14,7 @@ const state = {
     facingMode: 'environment',
     lightboxIndex: 0,
     weddingDate: new Date('2026-09-10T13:00:00'),
-    guestId: localStorage.getItem('weddingGuestId') || generateGuestId(),
-    // Temporary test start time: today at 21:57
-    photoStartTime: new Date('2026-03-16T21:57:00'),
-    // Approximate venue location: Faerie Glen, Pretoria
-    venueLat: -25.78778,
-    venueLng: 28.31667,
-    venueRadiusMeters: 3000, // ~3km radius to be more forgiving
-    locationAllowed: false,
-    locationChecked: false
+    guestId: localStorage.getItem('weddingGuestId') || generateGuestId()
 };
 
 const SUPABASE_URL = 'https://uptwmlulayrbcopdenwz.supabase.co';
@@ -60,29 +52,11 @@ function showToast(message, type = 'success') {
 }
 
 function canTakePhotosNow() {
-    return new Date() >= state.photoStartTime;
-}
-
-function toRad(deg) {
-    return (deg * Math.PI) / 180;
-}
-
-function distanceInMeters(lat1, lng1, lat2, lng2) {
-    const R = 6371000; // Earth radius in meters
-    const dLat = toRad(lat2 - lat1);
-    const dLng = toRad(lng2 - lng1);
-    const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRad(lat1)) *
-            Math.cos(toRad(lat2)) *
-            Math.sin(dLng / 2) *
-            Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
+    return true;
 }
 
 function canTakePhotosHere() {
-    return state.locationAllowed;
+    return true;
 }
 
 async function sendNotificationEmail(type, payload) {
@@ -201,15 +175,6 @@ const camera = {
     },
     
     async start() {
-        // Ensure we are at/near the venue before enabling camera
-        if (!state.locationChecked || !state.locationAllowed) {
-            const ok = await this.checkLocation();
-            if (!ok) {
-                showToast('Disposable camera only available at the wedding venue.');
-                return;
-            }
-        }
-        
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { 
@@ -223,58 +188,12 @@ const camera = {
             state.currentStream = stream;
             this.video.srcObject = stream;
             this.permissionDiv.style.display = 'none';
-            this.shutterBtn.disabled = !(canTakePhotosNow() && canTakePhotosHere());
+            this.shutterBtn.disabled = false;
             
         } catch (err) {
             console.error('Camera access denied:', err);
             this.showFallback();
         }
-    },
-    
-    async checkLocation() {
-        if (!navigator.geolocation) {
-            state.locationChecked = true;
-            state.locationAllowed = false;
-            return false;
-        }
-        
-        return new Promise((resolve) => {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    const { latitude, longitude } = pos.coords;
-                    const distance = distanceInMeters(
-                        latitude,
-                        longitude,
-                        state.venueLat,
-                        state.venueLng
-                    );
-                    
-                    state.locationChecked = true;
-                    state.locationAllowed = distance <= state.venueRadiusMeters;
-                    
-                    if (!state.locationAllowed) {
-                        console.warn(
-                            `Guest is ${Math.round(
-                                distance
-                            )}m from venue, outside allowed radius.`
-                        );
-                    }
-                    this.updateShotsDisplay();
-                    resolve(state.locationAllowed);
-                },
-                (err) => {
-                    console.warn('Geolocation error:', err);
-                    state.locationChecked = true;
-                    state.locationAllowed = false;
-                    resolve(false);
-                },
-                {
-                    enableHighAccuracy: true,
-                    maximumAge: 5 * 60 * 1000,
-                    timeout: 10000
-                }
-            );
-        });
     },
     
     showFallback() {
@@ -283,16 +202,6 @@ const camera = {
     },
     
     takePhoto() {
-        if (!canTakePhotosHere()) {
-            showToast('Disposable camera only works at the wedding venue.');
-            return;
-        }
-        
-        if (!canTakePhotosNow()) {
-            showToast('Disposable camera opens on 10 September 2026 at 4:30 PM.');
-            return;
-        }
-        
         // Flash effect
         this.flash.classList.add('active');
         setTimeout(() => this.flash.classList.remove('active'), 150);
@@ -1088,26 +997,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflowY = 'auto';
     document.body.style.overflow = '';
 
+    const safeInit = (name, fn) => {
+        try {
+            fn();
+        } catch (error) {
+            console.error(`Init failed: ${name}`, error);
+        }
+    };
+
     // Start countdown
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    safeInit('countdown', () => {
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    });
     
+    // Run attire slideshows early so they still render if another feature fails on mobile.
+    safeInit('dress slideshows', initDressSlideshows);
+
     // Initialize camera
-    camera.init();
+    safeInit('camera', () => camera.init());
     
     // Initialize gallery
-    gallery.init();
+    safeInit('gallery', () => gallery.init());
 
     // Initialize features
-    initCatalogueFilter();
-    initRSVP();
-    initContact();
-    initQA();
-    initNavigation();
-    initScrollAnimations();
-    initSmoothScroll();
-    initPhotoRings();
-    initDressSlideshows();
+    safeInit('catalogue filter', initCatalogueFilter);
+    safeInit('rsvp', initRSVP);
+    safeInit('contact', initContact);
+    safeInit('q&a', initQA);
+    safeInit('navigation', initNavigation);
+    safeInit('scroll animations', initScrollAnimations);
+    safeInit('smooth scroll', initSmoothScroll);
+    safeInit('photo rings', initPhotoRings);
     
     console.log('🎉 Zimri & Shawn Wedding Website Loaded!');
     console.log('📸 Camera ready - Take as many photos as you like!');
