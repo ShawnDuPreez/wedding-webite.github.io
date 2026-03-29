@@ -800,7 +800,14 @@ function initRSVP() {
         try {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-            
+            const songRequestTrimmed = (data.songRequest || '').trim();
+            if (!songRequestTrimmed) {
+                showToast('Please enter a song request.', 'error');
+                if (submitBtn) submitBtn.disabled = false;
+                return;
+            }
+            data.songRequest = songRequestTrimmed;
+
             // Add timestamp and ID
             data.submittedAt = new Date().toISOString();
             data.id = Date.now().toString();
@@ -814,6 +821,7 @@ function initRSVP() {
                         email: data.email,
                         attending: data.attending,
                         dietary: data.dietary || null,
+                        song_request: data.songRequest,
                         message: data.message || null,
                         submitted_at: data.submittedAt
                     }]);
