@@ -3701,6 +3701,41 @@ body > *:not(#cursorCanvas) {
     animation: fadeInUp 0.6s var(--transition-spring) 0.2s both;
 }
 
+/* RSVP Closed Notice */
+.rsvp-closed {
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+    border: 2px dashed var(--paper-tan);
+    animation: fadeInUp 0.6s var(--transition-spring) 0.2s both;
+}
+
+.rsvp-closed .closed-icon {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+}
+
+.rsvp-closed h3 {
+    font-family: var(--font-deco);
+    font-size: 1.75rem;
+    color: var(--ink-black);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+}
+
+.rsvp-closed p {
+    color: var(--ink-gray);
+    max-width: 420px;
+    margin: 0 auto var(--space-sm);
+}
+
+.rsvp-closed .closed-note {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
 /* Form Styles */
 .rsvp-form {
     display: flex;
